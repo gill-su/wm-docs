@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歐巴總部店 設計說明</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft JhengHei", "PingFang TC", -apple-system, sans-serif;
+    background: #f4f6fb;
+    color: #1f2a44;
+    line-height: 1.7;
+    padding: 32px 16px;
+  }
+  .page { max-width: 960px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border-radius: 20px;
+    padding: 34px 38px;
+    margin-bottom: 26px;
+    box-shadow: 0 12px 30px rgba(79,70,229,.25);
+  }
+  .hero h1 { font-size: 26px; margin-bottom: 8px; }
+  .hero p { opacity: .92; font-size: 15px; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,.2);
+    padding: 4px 12px; border-radius: 999px; font-size: 13px; margin-bottom: 14px;
+  }
+  .card {
+    background: #fff; border-radius: 16px; padding: 26px 30px;
+    margin-bottom: 22px; box-shadow: 0 4px 16px rgba(31,42,68,.06);
+  }
+  .card h2 {
+    font-size: 19px; margin-bottom: 16px; color: #4f46e5;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .num {
+    background: #4f46e5; color: #fff; width: 30px; height: 30px;
+    border-radius: 9px; display: inline-flex; align-items: center;
+    justify-content: center; font-size: 15px; flex-shrink: 0;
+  }
+  .decision {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    font-size: 16px; font-weight: 600;
+  }
+  .pill-old {
+    background: #fee2e2; color: #b91c1c; padding: 8px 16px;
+    border-radius: 10px; text-decoration: line-through; opacity: .8;
+  }
+  .pill-new {
+    background: #dcfce7; color: #15803d; padding: 8px 16px; border-radius: 10px;
+  }
+  .arrow { color: #9ca3af; font-size: 22px; }
+  ul.reasons { list-style: none; }
+  ul.reasons li {
+    background: #f8f9ff; border-left: 4px solid #7c3aed;
+    padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; font-size: 14.5px;
+  }
+  .wallet {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-top: 8px;
+  }
+  .wallet-box {
+    flex: 1; min-width: 240px; border-radius: 14px; padding: 18px;
+    border: 2px dashed #c7d2fe;
+  }
+  .wallet-box.hq { background: #eef2ff; }
+  .wallet-box.branch { background: #f0fdf4; border-color: #bbf7d0; }
+  .wallet-box h3 { font-size: 15px; margin-bottom: 10px; }
+  .chip {
+    display: inline-block; padding: 5px 10px; border-radius: 8px;
+    font-size: 12.5px; margin: 3px 4px 3px 0;
+  }
+  .chip.hq-c { background: #4f46e5; color: #fff; }
+  .chip.br-c { background: #16a34a; color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { padding: 11px 12px; text-align: left; border-bottom: 1px solid #eef0f6; vertical-align: top; }
+  th { background: #f8f9ff; color: #4f46e5; font-size: 13px; }
+  .yes { color: #15803d; font-weight: 700; }
+  .no { color: #b91c1c; font-weight: 700; }
+  .note-yes { background: #f0fdf4; }
+  .note-no { background: #fef9f9; }
+  .flow {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    background: #f8f9ff; padding: 14px 16px; border-radius: 10px;
+    margin-bottom: 12px; font-size: 13.5px;
+  }
+  .step { background: #fff; border: 1px solid #e0e3ee; padding: 7px 12px; border-radius: 8px; }
+  .step.final { background: #4f46e5; color: #fff; border-color: #4f46e5; font-weight: 600; }
+  .fa { color: #9ca3af; font-weight: 700; }
+  .keypoint {
+    background: linear-gradient(135deg,#fff7ed,#fef3c7);
+    border: 1px solid #fcd34d; border-radius: 14px; padding: 20px 24px;
+  }
+  .keypoint h2 { color: #b45309; }
+  .keypoint strong { color: #b45309; }
+  .footnote { font-size: 13px; color: #6b7280; margin-top: 8px; }
+  .tag { font-size: 12px; background:#eef2ff; color:#4f46e5; padding:2px 8px; border-radius:6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <span class="badge">內部討論結論</span>
+    <h1>歐巴「總部店」設計說明</h1>
+    <p>新開一間獨立分店作為總部，串接專屬 LINE OA</p>
+  </div>
+
+  <!-- 決策 -->
+  <div class="card">
+    <h2><span class="num">1</span>核心決策</h2>
+    <div class="decision">
+      <span class="pill-old">太平店＝總部</span>
+      <span class="arrow">→</span>
+      <span class="pill-new">新開「歐巴總部店」＝總部</span>
+    </div>
+    <p style="margin-top:14px; font-size:14.5px; color:#475569;">
+      總部店獨立串接 <span class="tag">一個專屬 LINE OA</span>，與分店分離。
+    </p>
+  </div>
+
+  <!-- 原因 -->
+  <div class="card">
+    <h2><span class="num">2</span>為什麼要獨立總部？</h2>
+    <ul class="reasons">
+      <li><strong>會員資料集中：</strong>全台會員註冊後資料都會同步到總部店。若用太平店當總部，會員資料瀏覽不易。</li>
+      <li><strong>權益切割彈性：</strong>方便日後關閉總部時取消權益、或建立總部專屬權益。<br>總部發行的權益 ＝ <strong>組織通用</strong>。</li>
+    </ul>
+  </div>
+
+  <!-- 錢包比喻 -->
+  <div class="card">
+    <h2><span class="num">3</span>概念比喻：點數錢包</h2>
+    <div class="wallet">
+      <div class="wallet-box hq">
+        <h3>🏢 總部</h3>
+        <span class="chip hq-c">總部錢包 ×5</span>
+        <p style="font-size:13px;color:#64748b;margin-top:8px;">只能新增總部權益錢包</p>
+      </div>
+      <div class="wallet-box branch">
+        <h3>🏪 分店</h3>
+        <span class="chip hq-c">總部錢包 ×5</span>
+        <span class="chip br-c">分店錢包 ×5</span>
+        <p style="font-size:13px;color:#64748b;margin-top:8px;">繼承總部 ＋ 可再新增自己的</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 情境表 -->
+  <div class="card">
+    <h2><span class="num">4</span>四種通知情境</h2>
+    <p style="font-size:13.5px;color:#64748b;margin-bottom:14px;">
+      關鍵：顧客要收到<strong>總部 LINE 推播</strong>，必須「加總部 LINE 好友 ＋ 綁定會員卡」。
+    </p>
+    <table>
+      <tr>
+        <th style="width:34px;">#</th>
+        <th>情境</th>
+        <th style="width:90px;">加總部LINE?</th>
+        <th style="width:110px;">收到推播?</th>
+        <th style="width:110px;">會員卡獲券?</th>
+      </tr>
+      <tr class="note-no">
+        <td>1</td>
+        <td>A店加好友＋註冊，消費1,000升白金（總部入會禮＋等級禮）</td>
+        <td class="no">否</td>
+        <td class="no">✗ 收不到</td>
+        <td class="yes">✓ 仍獲得</td>
+      </tr>
+      <tr class="note-yes">
+        <td>2</td>
+        <td>A店加好友＋註冊，A店店員發一張票券（由 A 店發出）</td>
+        <td>—</td>
+        <td class="yes">✓ 收到A店通知</td>
+        <td class="yes">✓ 獲得</td>
+      </tr>
+      <tr class="note-no">
+        <td>3</td>
+        <td>A店加好友＋註冊，年消60,000升鉑金（總部升等禮）</td>
+        <td class="no">否</td>
+        <td class="no">✗ 收不到</td>
+        <td class="yes">✓ 仍獲得</td>
+      </tr>
+      <tr class="note-yes">
+        <td>4</td>
+        <td>同上，但<strong>有</strong>加總部LINE＋綁定會員卡</td>
+        <td class="yes">是</td>
+        <td class="yes">✓ 收總部推播</td>
+        <td class="yes">✓ 獲得</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 重點結論 -->
+  <div class="card keypoint">
+    <h2>💡 結論</h2>
+    <p style="font-size:14.5px;">
+      要確保顧客一定收到「總部權益」的卡牌通知，必須：
+    </p>
+    <ul class="reasons" style="margin-top:12px;">
+      <li>① 引導顧客<strong>加總部 LINE 好友</strong>並<strong>綁定會員卡</strong></li>
+      <li>② 確保總部官方帳號的<strong>訊息數足夠</strong>，才能發送大量通知</li>
+    </ul>
+    <p class="footnote">📌 備註：歐巴總部與凱惠的串接，預計找一家正式的凱惠分店處理。</p>
+  </div>
+
+  <!-- 總部通知設計 -->
+  <div class="card">
+    <h2><span class="num">5</span>為何設計「總部通知」？＝ 節省訊息數</h2>
+    <div class="flow">
+      <span class="step">A店獲得總部權益</span>
+      <span class="fa">→</span>
+      <span class="step">A店通知＋總部通知</span>
+      <span class="fa">→</span>
+      <span class="step final">統一總部通知</span>
+    </div>
+    <div class="flow">
+      <span class="step">A店消費使用權益</span>
+      <span class="fa">→</span>
+      <span class="step">A店通知＋總部通知</span>
+      <span class="fa">→</span>
+      <span class="step final">統一總部通知</span>
+    </div>
+    <div class="flow">
+      <span class="step">A店獲得權益</span>
+      <span class="fa">→</span>
+      <span class="step">到B店使用</span>
+      <span class="fa">→</span>
+      <span class="step">A店＋B店通知</span>
+      <span class="fa">→</span>
+      <span class="step final">統一總部通知</span>
+    </div>
+    <p style="margin-top:14px;font-size:14.5px;color:#475569;">
+      🎯 目的：避免訊息數用太多、減少打擾顧客 → <strong>統一在總部通知</strong>。
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
