@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 工作台操作守則</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft JhengHei", "PingFang TC", -apple-system, sans-serif;
+    background: #f4f6fb;
+    color: #1f2a44;
+    line-height: 1.7;
+    padding: 32px 16px;
+  }
+  .page { max-width: 980px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, #6366f1, #2563eb);
+    color: #fff;
+    border-radius: 20px;
+    padding: 34px 38px;
+    margin-bottom: 26px;
+    box-shadow: 0 12px 30px rgba(37,99,235,.25);
+  }
+  .hero h1 { font-size: 26px; margin-bottom: 8px; }
+  .hero p { opacity: .92; font-size: 15px; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,.2);
+    padding: 4px 12px; border-radius: 999px; font-size: 13px; margin-bottom: 14px;
+  }
+  /* 圖例 */
+  .legend {
+    background:#fff; border-radius:14px; padding:16px 22px; margin-bottom:22px;
+    box-shadow:0 4px 16px rgba(31,42,68,.06);
+    display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:13px;
+  }
+  .legend b { font-size:13px; color:#475569; }
+  .pill {
+    display:inline-block; padding:5px 12px; border-radius:999px;
+    font-size:13px; font-weight:600;
+  }
+  .p-wait { background:#fef3c7; color:#b45309; }
+  .p-mid  { background:#dbeafe; color:#1d4ed8; }
+  .p-done { background:#dcfce7; color:#15803d; }
+  .p-stop { background:#fee2e2; color:#b91c1c; }
+  .p-card { background:#ede9fe; color:#6d28d9; }
+  .card {
+    background: #fff; border-radius: 16px; padding: 24px 28px;
+    margin-bottom: 22px; box-shadow: 0 4px 16px rgba(31,42,68,.06);
+  }
+  .card h2 {
+    font-size: 19px; margin-bottom: 6px; color: #2563eb;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .emoji { font-size: 22px; }
+  .sub { font-size: 13.5px; color:#64748b; margin: 0 0 16px 34px; }
+  /* 流程步驟 */
+  .flow {
+    display: flex; align-items: stretch; gap: 0; flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .node {
+    flex: 1; min-width: 200px; background:#f8fafc;
+    border:1px solid #e6e9f2; border-radius:12px; padding:14px 16px;
+    margin: 6px; position:relative;
+  }
+  .node .trigger { font-size:13.5px; color:#334155; margin-bottom:10px; }
+  .node .trigger b { color:#1e293b; }
+  .node .states { display:flex; flex-wrap:wrap; gap:6px; }
+  .node.branch-yes { background:#f0fdf4; border-color:#bbf7d0; }
+  .node.branch-no  { background:#fef9f9; border-color:#fecaca; }
+  .node.final { background:#eff6ff; border-color:#bfdbfe; }
+  .label { font-size:11.5px; color:#94a3b8; display:block; margin-bottom:4px; font-weight:600; letter-spacing:.5px; }
+  .arrow-h { align-self:center; color:#cbd5e1; font-weight:800; font-size:20px; padding:0 2px; }
+  .branchwrap { display:flex; flex-wrap:wrap; gap:0; }
+  .note {
+    margin-top:12px; font-size:12.5px; color:#94a3b8;
+    background:#f8fafc; border-left:3px solid #e2e8f0;
+    padding:8px 12px; border-radius:6px;
+  }
+  .keypoint {
+    background: linear-gradient(135deg,#fff7ed,#fef3c7);
+    border: 1px solid #fcd34d;
+  }
+  .keypoint h2 { color: #b45309; }
+  ul.kp { list-style:none; margin-top:6px; }
+  ul.kp li {
+    background:#fff; border-left:4px solid #f59e0b;
+    padding:11px 15px; border-radius:8px; margin-bottom:9px; font-size:14px;
+  }
+  ul.kp li strong { color:#b45309; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <span class="badge">CS · 操作守則</span>
+    <h1>AI 工作台操作守則</h1>
+    <p>登記管理 ── 五類事件的工作台狀態流轉一覽</p>
+  </div>
+
+  <!-- 圖例 -->
+  <div class="legend">
+    <b>狀態圖例</b>
+    <span class="pill p-wait">待處理 起點</span>
+    <span class="pill p-mid">處理中／已轉達 過程</span>
+    <span class="pill p-done">已完成／已修復 終點</span>
+    <span class="pill p-card">卡片狀態</span>
+    <span class="pill p-stop">分流／例外</span>
+  </div>
+
+  <!-- 1 LINE 權限連結 -->
+  <div class="card">
+    <h2><span class="emoji">🔗</span>LINE 權限連結</h2>
+    <p class="sub">AI 登記 LINE 權限收取</p>
+    <div class="flow">
+      <div class="node">
+        <span class="label">AI 登記</span>
+        <div class="trigger"><b>登記 LINE 權限收取</b></div>
+        <div class="states"><span class="pill p-wait">待處理</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node final">
+        <span class="label">收取完成</span>
+        <div class="trigger">連結點選後即收取完成</div>
+        <div class="states"><span class="pill p-done">已完成</span></div>
+      </div>
+    </div>
+    <div class="note">⚠️ 連結僅能點選一次：<b>不論是否缺 API 或操作人員權限不足</b>，狀態一律改「已完成」。<br>（「已過期」狀態暫時用不到）</div>
+  </div>
+
+  <!-- 2 金流窗口 -->
+  <div class="card">
+    <h2><span class="emoji">💰</span>金流窗口</h2>
+    <p class="sub">AI 登記金流申請需求</p>
+    <div class="flow">
+      <div class="node">
+        <span class="label">AI 登記</span>
+        <div class="trigger"><b>登記金流申請需求</b></div>
+        <div class="states"><span class="pill p-wait">待處理</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node">
+        <span class="label">CS 人工</span>
+        <div class="trigger">人工處理、提交申請</div>
+        <div class="states"><span class="pill p-mid">已轉達</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node final">
+        <span class="label">申請通過</span>
+        <div class="trigger">金流窗口通知通過，協助店家串接完成</div>
+        <div class="states"><span class="pill p-done">已完成</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Bug 回報 -->
+  <div class="card">
+    <h2><span class="emoji">🐛</span>Bug 回報</h2>
+    <p class="sub">AI 登記 BUG 並開卡（工作台狀態 ＋ 卡片狀態 雙軌）</p>
+    <div class="flow">
+      <div class="node">
+        <span class="label">AI 登記並開卡</span>
+        <div class="trigger"><b>登記 BUG 並開卡</b></div>
+        <div class="states">
+          <span class="pill p-wait">待處理</span>
+          <span class="pill p-card">卡片 PENDING VERIFICATION</span>
+        </div>
+      </div>
+    </div>
+    <div class="branchwrap" style="margin-top:4px;">
+      <div class="node branch-yes" style="min-width:280px;">
+        <span class="label">CS 確認：是 BUG</span>
+        <div class="trigger">確認為真實 BUG</div>
+        <div class="states">
+          <span class="pill p-mid">已回報</span>
+          <span class="pill p-card">確認為 BUG · ROOT CAUSE ANALYSIS</span>
+        </div>
+      </div>
+      <div class="node branch-no" style="min-width:280px;">
+        <span class="label">CS 確認：不是 BUG</span>
+        <div class="trigger">輸入確切原因排除</div>
+        <div class="states">
+          <span class="pill p-stop">已排除</span>
+          <span class="pill p-card">無效或誤操作 · INVALID</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow" style="margin-top:4px;">
+      <div class="node final">
+        <span class="label">修復完成通知 後續結案</span>
+        <div class="trigger">卡片收到修復完成通知；卡片新增標籤 <b>【CS 已通知 / CS 無須通知】</b> 即結案</div>
+        <div class="states">
+          <span class="pill p-done">已修復</span>
+          <span class="pill p-card">結案完成</span>
+        </div>
+      </div>
+    </div>
+    <div class="note">（「已關閉」狀態暫時用不到）</div>
+  </div>
+
+  <!-- 4 功能許願 -->
+  <div class="card">
+    <h2><span class="emoji">✨</span>功能許願</h2>
+    <p class="sub">AI 登記店家功能優化、許願需求</p>
+    <div class="flow">
+      <div class="node">
+        <span class="label">AI 登記</span>
+        <div class="trigger"><b>登記功能優化／許願需求</b></div>
+        <div class="states"><span class="pill p-wait">待處理</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node final">
+        <span class="label">完成登記</span>
+        <div class="trigger">已完成 BOB 需求表登記</div>
+        <div class="states"><span class="pill p-done">已提交</span></div>
+      </div>
+    </div>
+    <div class="note">（「已核准／已完成」狀態暫時用不到；許願是否完成，後續到 <b>BOB 需求表</b>統計）</div>
+  </div>
+
+  <!-- 5 求助事件 -->
+  <div class="card">
+    <h2><span class="emoji">🆘</span>求助事件</h2>
+    <p class="sub">AI 開人工單求助</p>
+    <div class="flow">
+      <div class="node">
+        <span class="label">AI 開單</span>
+        <div class="trigger"><b>開人工單求助</b></div>
+        <div class="states"><span class="pill p-wait">待處理</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node">
+        <span class="label">資料不足</span>
+        <div class="trigger">店家問題不明確，請其提供更多必要資料</div>
+        <div class="states"><span class="pill p-mid">處理中</span></div>
+      </div>
+      <span class="arrow-h">→</span>
+      <div class="node final">
+        <span class="label">處理完成</span>
+        <div class="trigger">店家問題已處理完成</div>
+        <div class="states"><span class="pill p-done">已完成</span></div>
+      </div>
+    </div>
+    <div class="note">（「已關閉」狀態暫時用不到）</div>
+  </div>
+
+  <!-- 重點摘要 -->
+  <div class="card keypoint">
+    <h2>💡 重點摘要</h2>
+    <ul class="kp">
+      <li>🔗 <strong>LINE 權限</strong>：連結一次性，點過即「已完成」，不分成功與否。</li>
+      <li>💰 <strong>金流</strong>：待處理 → 已轉達（CS 提交）→ 已完成（串接完成）。</li>
+      <li>🐛 <strong>Bug</strong>：工作台與卡片<strong>雙軌</strong>；是 BUG→已回報、非 BUG→已排除（填原因）、修復後→已修復＋打標籤結案。</li>
+      <li>✨ <strong>許願</strong>：登記 BOB 需求表即「已提交」，完成度看 BOB 統計。</li>
+      <li>🆘 <strong>求助</strong>：待處理 →（缺資料）處理中 → 已完成。</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
