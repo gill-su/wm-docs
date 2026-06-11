@@ -43,16 +43,17 @@
   .grp-label {
     font-size:9px; font-weight:700; letter-spacing:.2px;
     padding:2px 7px; border-radius:6px; white-space:nowrap;
+    background:transparent; border:1.5px solid currentColor;
   }
   /* AI 工作台（本平台）── 藍 */
-  .state-grp.manual .grp-label { background:#dbeafe; color:#1d4ed8; }
+  .state-grp.manual .grp-label { color:#1d4ed8; }
   .manual .pill {
     box-shadow:0 0 0 3px #991b1b;
     font-size:13.5px; padding:6px 13px;
   }
   .manual .pill::before { content:"✋ "; }
   /* 其他平台卡片 ── 紫 */
-  .state-grp.auto .grp-label { background:#ede9fe; color:#6d28d9; }
+  .state-grp.auto .grp-label { color:#6d28d9; }
   .auto .pill {
     box-shadow:0 0 0 3px #991b1b;
     font-size:13.5px; padding:6px 13px;
@@ -116,9 +117,10 @@
   .origin-tag {
     font-size:9px; font-weight:700; letter-spacing:.2px;
     padding:2px 7px; border-radius:6px; white-space:nowrap;
+    background:transparent; border:1.5px solid currentColor;
   }
-  .origin-tag.wb   { background:#dbeafe; color:#1d4ed8; }
-  .origin-tag.jira { background:#ede9fe; color:#6d28d9; }
+  .origin-tag.wb   { color:#1d4ed8; }
+  .origin-tag.jira { color:#6d28d9; }
   /* 分流（橫向兩條岔路，置於同一格內上下排列） */
   .step.split { gap:10px; }
   .branch { border-radius:12px; padding:12px 15px; display:flex; flex-direction:column; }
