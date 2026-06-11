@@ -112,6 +112,13 @@
   }
   .origin-label { font-size:10.5px; font-weight:700; color:#94a3b8; letter-spacing:.3px; }
   .origin .pill { opacity:.85; }
+  .origin-row { display:flex; align-items:center; gap:7px; }
+  .origin-tag {
+    font-size:10.5px; font-weight:700; letter-spacing:.3px;
+    padding:3px 9px; border-radius:7px; white-space:nowrap;
+  }
+  .origin-tag.wb   { background:#dbeafe; color:#1d4ed8; }
+  .origin-tag.jira { background:#ede9fe; color:#6d28d9; }
   /* 分流（橫向兩條岔路，置於同一格內上下排列） */
   .step.split { gap:10px; }
   .branch { border-radius:12px; padding:12px 15px; display:flex; flex-direction:column; }
@@ -159,7 +166,7 @@
     <span class="badge">CS · 操作守則</span>
     <h1>AI 工作台操作守則</h1>
     <p>登記管理 ── 五類事件的工作台狀態流轉，逐步驟流程說明</p>
-    <p style="margin-top:8px;font-size:13.5px;background:rgba(255,255,255,.16);display:inline-block;padding:6px 14px;border-radius:10px;">✋ 兩種狀態<b>都需 CS 人工手動調整</b>：<b>藍框＝AI 工作台</b>、<b>紫框＝其他平台（卡片）</b>，分屬不同平台操作，請依步驟兩邊各自更新。</p>
+    <p style="margin-top:8px;font-size:13.5px;background:rgba(255,255,255,.16);display:inline-block;padding:6px 14px;border-radius:10px;">✋ 兩種狀態<b>都需 CS 人工手動調整</b>：<b>藍框＝AI 工作台</b>、<b>紫框＝Jira卡</b>，分屬不同平台操作，請依步驟兩邊各自更新。</p>
   </div>
 
   <!-- 1 LINE 權限連結 -->
@@ -170,7 +177,7 @@
     <div class="steps">
       <div class="origin">
         <span class="origin-label">原始狀態 · AI 自動</span>
-        <span class="pill p-wait">待處理</span>
+        <div class="origin-row"><span class="origin-tag wb">工作台</span><span class="pill p-wait">待處理</span></div>
       </div>
       <span class="arrow">→</span>
       <div class="step">
@@ -190,7 +197,7 @@
     <div class="steps">
       <div class="origin">
         <span class="origin-label">原始狀態 · AI 自動</span>
-        <span class="pill p-wait">待處理</span>
+        <div class="origin-row"><span class="origin-tag wb">工作台</span><span class="pill p-wait">待處理</span></div>
       </div>
       <span class="arrow">→</span>
       <div class="step">
@@ -210,13 +217,13 @@
   <!-- 3 Bug 回報 -->
   <div class="card">
     <h2><span class="emoji">🐛</span>Bug 回報</h2>
-    <p class="sub">AI 登記 BUG 並開卡（工作台狀態 ＋ 卡片狀態 雙軌）</p>
-    <div class="summary">流程說明：原始狀態為「待處理／卡片 PENDING VERIFICATION」（AI 自動標記）；<b>CS 判斷是否為真實 BUG（分流）</b> → 是則回報修復、否則填原因排除 → 修復完成打標籤結案。</div>
+    <p class="sub">AI 登記 BUG 並開卡（工作台狀態 ＋ Jira卡狀態 雙軌）</p>
+    <div class="summary">流程說明：原始狀態為「待處理／Jira卡 PENDING VERIFICATION」（AI 自動標記）；<b>CS 判斷是否為真實 BUG（分流）</b> → 是則回報修復、否則填原因排除 → 修復完成打標籤結案。</div>
     <div class="steps">
       <div class="origin">
         <span class="origin-label">原始狀態 · AI 自動</span>
-        <span class="pill p-wait">待處理</span>
-        <span class="pill p-card">卡片 PENDING VERIFICATION</span>
+        <div class="origin-row"><span class="origin-tag wb">工作台</span><span class="pill p-wait">待處理</span></div>
+        <div class="origin-row"><span class="origin-tag jira">Jira卡</span><span class="pill p-card">PENDING VERIFICATION</span></div>
       </div>
       <span class="arrow">→</span>
       <div class="step split">
@@ -226,7 +233,7 @@
           <div class="step-desc">確認為真實 BUG，回報工程修復。</div>
           <div class="states">
             <div class="state-grp manual"><span class="grp-label">工作台</span><span class="pill p-mid">已回報</span></div>
-            <div class="state-grp auto"><span class="grp-label">其他平台·卡片</span><span class="pill p-card">確認為 BUG · ROOT CAUSE ANALYSIS</span></div>
+            <div class="state-grp auto"><span class="grp-label">Jira卡</span><span class="pill p-card">確認為 BUG · ROOT CAUSE ANALYSIS</span></div>
           </div>
         </div>
         <div class="branch no">
@@ -234,7 +241,7 @@
           <div class="step-desc">輸入確切原因後排除，流程結束。</div>
           <div class="states">
             <div class="state-grp manual"><span class="grp-label">工作台</span><span class="pill p-stop">已排除</span></div>
-            <div class="state-grp auto"><span class="grp-label">其他平台·卡片</span><span class="pill p-card">無效或誤操作 · INVALID</span></div>
+            <div class="state-grp auto"><span class="grp-label">Jira卡</span><span class="pill p-card">無效或誤操作 · INVALID</span></div>
           </div>
         </div>
       </div>
@@ -244,7 +251,7 @@
         <div class="step-desc">卡片收到修復完成通知後，於卡片<b>新增標籤即結案</b>。</div>
         <div class="states">
           <div class="state-grp manual"><span class="grp-label">工作台</span><span class="pill p-done">已修復</span></div>
-          <div class="state-grp auto"><span class="grp-label">其他平台·卡片</span><span class="pill p-card">標籤 CS 已通知 or CS 無須通知</span></div>
+          <div class="state-grp auto"><span class="grp-label">Jira卡</span><span class="pill p-card">標籤 CS 已通知 or CS 無須通知</span></div>
         </div>
       </div>
     </div>
@@ -259,7 +266,7 @@
     <div class="steps">
       <div class="origin">
         <span class="origin-label">原始狀態 · AI 自動</span>
-        <span class="pill p-wait">待處理</span>
+        <div class="origin-row"><span class="origin-tag wb">工作台</span><span class="pill p-wait">待處理</span></div>
       </div>
       <span class="arrow">→</span>
       <div class="step">
@@ -279,7 +286,7 @@
     <div class="steps">
       <div class="origin">
         <span class="origin-label">原始狀態 · AI 自動</span>
-        <span class="pill p-wait">待處理</span>
+        <div class="origin-row"><span class="origin-tag wb">工作台</span><span class="pill p-wait">待處理</span></div>
       </div>
       <span class="arrow">→</span>
       <div class="step">
@@ -303,7 +310,7 @@
     <ul class="kp">
       <li>🔗 <strong>LINE 權限</strong>：連結一次性，點過即「已完成」，不分成功與否。</li>
       <li>💰 <strong>金流</strong>：待處理 → 已轉達（CS 提交）→ 已完成（串接完成）。</li>
-      <li>🐛 <strong>Bug</strong>：工作台與卡片<strong>雙軌</strong>；是 BUG→已回報、非 BUG→已排除（填原因）、修復後→已修復＋打標籤結案。</li>
+      <li>🐛 <strong>Bug</strong>：工作台與 Jira卡<strong>雙軌</strong>；是 BUG→已回報、非 BUG→已排除（填原因）、修復後→已修復＋打標籤結案。</li>
       <li>✨ <strong>許願</strong>：登記 BOB 需求表即「已提交」，完成度看 BOB 統計。</li>
       <li>🆘 <strong>求助</strong>：待處理 →（缺資料）處理中 → 已完成。</li>
     </ul>
